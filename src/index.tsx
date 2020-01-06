@@ -5,13 +5,16 @@ import { render } from 'react-dom'
 
 import Canvas from './components/canvas'
 import Controls from './components/controls'
+import Diagnostic from './components/diagnostic'
 
 import Recorder from './lib/recorder'
 import randomKebab from './lib/randomkebab'
 
+
 class App extends Component {
   state = {
     sessionName: 'untitled session',
+    screen: 'welcome',
   }
 
   componentDidMount() {
@@ -43,8 +46,22 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.screen === 'welcome') {
+      return (
+        <Fragment>
+          <p>
+            <b>welcome</p> in testing session&nbsp;
+            <b>{this.state.sessionName}</b>
+          </p>
+          <Diagnostic />
+
+        </Fragment>
+      )
+    }
+
     return (
       <Fragment>
+
         <h1>{this.state.sessionName}</h1>
         <Canvas getEl={this.handleGetEl}/>
         <Controls start={this.handleStart} stop={this.handleStop} download={this.handleDownload} />
