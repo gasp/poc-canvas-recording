@@ -23,6 +23,7 @@ class App extends Component {
 
   handleDownload = () => {
     console.log('app download')
+    this.recorder && this.recorder.download()
   }
 
   handleStart = () => {

@@ -5,11 +5,16 @@ import './controls.styl'
 
 export default class Controls extends Component {
   state = {
-    recording: false
+    empty: true,
+    recording: false,
   }
 
-  handleStart = () => {)
-    this.setState(prevState => ({...prevState, recording: true}))
+  handleDownload = () => {
+    this.props.download()
+  }
+
+  handleStart = () => {
+    this.setState(prevState => ({...prevState, empty: false, recording: true}))
     this.props.start()
   }
 
@@ -23,7 +28,7 @@ export default class Controls extends Component {
       <div className="controls">
         <button onClick={this.handleStart} disabled={this.state.recording}>start</button>
         <button onClick={this.handleStop} disabled={!this.state.recording}>stop</button>
-        <button disabled>save</button>
+        <button onClick={this.handleDownload} disabled={this.state.empty || this.state.recording}>download</button>
       </div>
     )
   }

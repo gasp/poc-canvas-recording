@@ -65,4 +65,18 @@ export default class Recorder {
     this.mediaRecorder.stop();
     console.log('Recorded Blobs: ', this.recordedBlobs);
   }
+
+  download() {
+    const blob = new Blob(this.recordedBlobs, {type: 'video/webm'});
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'test.webm';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, 100);
 }
