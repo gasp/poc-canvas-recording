@@ -5,8 +5,8 @@ import './controls.styl'
 
 export default class Controls extends Component {
   state = {
-    empty: true,
-    recording: false,
+    empty: false,
+    recording: true,
   }
 
   handleDownload = () => {

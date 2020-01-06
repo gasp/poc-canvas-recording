@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Component, Fragment } from 'react'
 import { render } from 'react-dom'
-// import './index.css'
+import './index.styl'
 
 import Canvas from './components/canvas'
 import Controls from './components/controls'
@@ -36,8 +36,11 @@ class App extends Component {
   }
 
   handleStart = () => {
-    console.log('app start', this.recorder)
-    this.recorder && this.recorder.startRecording()
+    this.setState(prevProps => ({...prevProps, screen: 'proto'}))
+    setTimeout(() => {
+      console.log('app start', this.recorder)
+      this.recorder && this.recorder.startRecording()
+    }, 24)
   }
 
   handleStop = () => {
@@ -54,15 +57,15 @@ class App extends Component {
             <b>{this.state.sessionName}</b>
           </p>
           <Diagnostic />
-
+          <hr />
+          <p>After clicking this button, click stop and download buttons at the bottom of your screen</p>
+          <button onClick={this.handleStart}>I am ready</button>
         </Fragment>
       )
     }
 
     return (
       <Fragment>
-
-        <h1>{this.state.sessionName}</h1>
         <Canvas getEl={this.handleGetEl}/>
         <Controls start={this.handleStart} stop={this.handleStop} download={this.handleDownload} />
       </Fagment>
