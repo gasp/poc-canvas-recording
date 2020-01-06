@@ -7,7 +7,7 @@ import './canvas.styl'
 
 // https://github.com/vnglst/react-hooks-canvas/blob/master/src/hooks/index.js
 
-export default function Canvas {
+export default function Canvas({getEl}) {
   const canvasRef = useRef(null)
   const enlapsed = useRaf(5000, 1000);
   const {docX, docY, posX, posY, elX, elY, elW, elH} = useMouse(canvasRef);
@@ -20,6 +20,7 @@ export default function Canvas {
       const ctx = canvasRef.current.getContext('2d')
       setCtx(ctx)
       setDim({width: canvasRef.current.width, height: canvasRef.current.height})
+      typeof getEl === 'function' && getEl(canvasRef.current)
     }
     return () => {
       console.log('unmount')
@@ -27,13 +28,7 @@ export default function Canvas {
   }, [canvasRef])
 
   if(ctx && dim.width) {
-    draw({
-      ctx,
-      docX,
-      docY,
-      dim,
-      time: enlapsed
-    })
+    draw({ ctx, docX, docY, dim, time: enlapsed })
   }
 
 

@@ -13,8 +13,6 @@ interface DrawStuff {
 
 export default function draw({ ctx, docX, docY, dim, time}: DrawStuff) {
 
-  console.log(dim)
-
   // clearRect some space
   ctx.clearRect(0, 290, dim.width, 50);
 
