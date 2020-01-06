@@ -7,10 +7,16 @@ import Canvas from './components/canvas'
 import Controls from './components/controls'
 
 import Recorder from './lib/recorder'
+import randomKebab from './lib/randomkebab'
 
 class App extends Component {
+  state = {
+    sessionName: 'untitled session',
+  }
+
   componentDidMount() {
     this.recorder = null
+    this.setState({sessionName: randomKebab()})
   }
 
   componentWillUnmount() {
@@ -23,7 +29,7 @@ class App extends Component {
 
   handleDownload = () => {
     console.log('app download')
-    this.recorder && this.recorder.download()
+    this.recorder && this.recorder.download(this.state.sessionName)
   }
 
   handleStart = () => {
@@ -39,7 +45,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <h1>canvas recording poc</h1>
+        <h1>{this.state.sessionName}</h1>
         <Canvas getEl={this.handleGetEl}/>
         <Controls start={this.handleStart} stop={this.handleStop} download={this.handleDownload} />
       </Fagment>

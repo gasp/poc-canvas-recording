@@ -5,8 +5,6 @@ import draw from '../lib/draw.ts'
 
 import './canvas.styl'
 
-// https://github.com/vnglst/react-hooks-canvas/blob/master/src/hooks/index.js
-
 export default function Canvas({getEl}) {
   const canvasRef = useRef(null)
   const enlapsed = useRaf(5000, 1000);

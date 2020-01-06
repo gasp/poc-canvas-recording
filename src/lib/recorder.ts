@@ -66,13 +66,13 @@ export default class Recorder {
     console.log('Recorded Blobs: ', this.recordedBlobs);
   }
 
-  download() {
+  download(filename: string) {
     const blob = new Blob(this.recordedBlobs, {type: 'video/webm'});
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.style.display = 'none';
     a.href = url;
-    a.download = 'test.webm';
+    a.download = `${filename}.webm`;
     document.body.appendChild(a);
     a.click();
     setTimeout(() => {
